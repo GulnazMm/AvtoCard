@@ -15,9 +15,10 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CardTest {
 
-    public String generateDate(int days){
+    public String generateDate(int days) {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
+
     String planDate = generateDate(3);
 
     @Test
@@ -31,10 +32,11 @@ public class CardTest {
         $("[name='phone']").setValue("+79174203535");
         $x("// *[@class='checkbox__box']").click();
         $x("// *[text()='Запланировать']").click();
-        $("[data-test-id = 'replan-notification']").should(visible,Duration.ofSeconds(10));
-        $x("//*[text()='Перепланировать']").click();
-        $$("[data-test-id=success-notification]").filter(visible).first(1);
-                /*.shouldHave(Condition.text("Успешно! Встреча успешно запланирована на" + planDate), Duration.ofSeconds(10));*/
+        $("[data-test-id=success-notification]")
+                .shouldHave(Condition.text("Успешно! Встреча успешно запланирована на " + planDate), Duration.ofSeconds(10))
+                .shouldBe(visible);
 
     }
+
+
 }
