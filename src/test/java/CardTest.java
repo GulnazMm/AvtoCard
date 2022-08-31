@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import java.nio.channels.ConnectionPendingException;
@@ -26,8 +27,8 @@ public class CardTest {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         $x("//input[@placeholder='Город']").setValue("Уфа");
-        $x("//input[@placeholder='Дата встречи']").setValue("20.08.2022");
-        $x("//input[@placeholder='Дата встречи']").setValue(planDate);
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        $("[data-test-id='date'] input").setValue(planDate);
         $("[name= 'name']").setValue("Иванова-Петрова Мария");
         $("[name='phone']").setValue("+79174203535");
         $x("// *[@class='checkbox__box']").click();
